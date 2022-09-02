@@ -2,6 +2,7 @@ import 'package:shopping_cart/actions/index.dart';
 import 'package:shopping_cart/models/cart.dart';
 import 'package:shopping_cart/models/products.dart';
 import 'package:redux_saga/redux_saga.dart';
+import 'package:shopping_cart/models/time.dart';
 import 'package:shopping_cart/reducers/selectors.dart';
 import 'package:shopping_cart/services/index.dart';
 
@@ -10,7 +11,8 @@ rootSaga() sync* {
     #t1: Fork(getAllProducts),
     #t2: Fork(watchGetProducts),
     #t3: Fork(trigGetProducts),
-    #t4: Fork(watchCheckout)
+    #t4: Fork(watchCheckout),
+    #t5: Fork(watchGetTime),
   });
 }
 
@@ -20,10 +22,23 @@ getAllProducts({action}) sync* {
   yield Put(ReceiveProducts(products.value!));
 }
 
+fetchTime({action}) sync* {
+  var time = Result<Time>();
+  yield Call(fetchTimeAPI, result: time);
+  print('got result');
+  yield Put(FetchTimeSuccess(time.value!));
+}
+
 watchGetProducts() sync* {
   // takeEvery will fork a new 'getAllProducts` task on each GetAllProducts actions
   // concurrent GetAllProducts actions are allowed
   yield TakeEvery(getAllProducts, pattern: GetAllProducts);
+}
+
+watchGetTime() sync* {
+  // takeEvery will fork a new 'getAllProducts` task on each GetAllProducts actions
+  // concurrent GetAllProducts actions are allowed
+  yield TakeEvery(fetchTime, pattern: FetchTime);
 }
 
 trigGetProducts() sync* {

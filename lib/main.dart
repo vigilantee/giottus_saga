@@ -5,6 +5,7 @@ import 'package:flutter_redux/flutter_redux.dart';
 import 'package:redux/redux.dart';
 import 'package:shopping_cart/pages/cart.dart';
 import 'package:shopping_cart/pages/home.dart';
+import 'package:shopping_cart/pages/time.dart';
 import 'config/configureStore.dart';
 import 'models/appState.dart';
 
@@ -29,7 +30,8 @@ class MyApp extends StatelessWidget {
           ),
           debugShowCheckedModeBanner: false,
           routes: {
-            '/': (context) => HomePage(),
+            '/': (context) => TimePage(),
+            '/time': (context) => HomePage(),
             '/cart': (context) => CartPage(),
           },
         ));

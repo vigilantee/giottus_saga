@@ -1,5 +1,6 @@
 import 'package:shopping_cart/models/cart.dart';
 import 'package:shopping_cart/models/products.dart';
+import 'package:shopping_cart/models/time.dart';
 
 class ReceiveProducts {
   final Products products;
@@ -34,3 +35,12 @@ class CheckoutFailure {
 
   CheckoutFailure(this.error);
 }
+
+class FetchTime {}
+
+class FetchTimeSuccess {
+  Time time;
+  FetchTimeSuccess(this.time);
+}
+
+class FetchTimeFailure {}

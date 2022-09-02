@@ -8,7 +8,7 @@ double getCartTotal(AppState state) => state.cart.quantityById.keys.fold(
         state.cart.quantityById[productId]! *
             state.products.items.singleWhere((p) => p.id == productId).price);
 
-getCartItemCount(AppState state) =>
-    state.cart.quantityById.values.fold(0, (int sum, int quantity) => sum + quantity);
+getCartItemCount(AppState state) => state.cart.quantityById.values
+    .fold(0, (int sum, int quantity) => sum + quantity);
 
 Cart getCart(AppState state) => state.cart;
