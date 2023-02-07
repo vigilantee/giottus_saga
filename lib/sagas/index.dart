@@ -26,7 +26,10 @@ fetchTime({action}) sync* {
   var time = Result<Time>();
   yield Call(fetchTimeAPI, result: time);
   print('got result');
-  yield Put(FetchTimeSuccess(time.value!));
+  final stopwatch = Stopwatch()..start();
+  yield PutResolve(FetchTimeSuccess(time.value!));
+  print('update executed in ${stopwatch.elapsed}');
+  print('got result 2');
 }
 
 watchGetProducts() sync* {
